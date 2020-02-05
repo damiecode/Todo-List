@@ -48,8 +48,8 @@ $ npm run start
 
 👤 **Ebuka Umeokonkwo**
 
-- Github: [@ebukaume](https://github.com/damiecode)
-- Twitter: [@ebukaume](https://twitter.com/iamlildamski)
+- Github: [@damiecode](https://github.com/damiecode)
+- Twitter: [@iamlildamski](https://twitter.com/iamlildamski)
 
 ## 🤝 Contributing
 
