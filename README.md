@@ -46,7 +46,7 @@ $ npm run start
 
 ## Authors
 
-👤 **Ebuka Umeokonkwo**
+👤 **Damilola Ale**
 
 - Github: [@damiecode](https://github.com/damiecode)
 - Twitter: [@iamlildamski](https://twitter.com/iamlildamski)
