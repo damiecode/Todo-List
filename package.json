@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/damiecode/Todo-List/issues"
   },
-  "homepage": "https://github.com/damiecode/Todo-List#readme"
+  "homepage": "https://github.com/damiecode/Todo-List#readme",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
+  }
 }
