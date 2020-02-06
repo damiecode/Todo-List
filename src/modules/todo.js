@@ -2,7 +2,7 @@ const ToDo = (title, description, dueDate, priority) => ({
   title,
   description,
   dueDate,
-  priority
-})
+  priority,
+});
 
-export default ToDo
+export default ToDo;
