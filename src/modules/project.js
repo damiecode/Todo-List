@@ -4,6 +4,6 @@ const Project = (title) => ({
 })
 
 const addTodo = (todo, project) => {
-  project.todoList.push(todo)
-}
-export { Project, addTodo }
+  project.todoList.push(todo);
+};
+export { Project, addTodo };
