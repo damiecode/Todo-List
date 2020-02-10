@@ -1,5 +1,7 @@
 import * as LocalStorage from './localstorage';
 
+const main = document.getElementById('main');
+
 const todo = (project) => {
   const container = document.createElement('form');
   container.classList.add('todoForm');
@@ -84,6 +86,11 @@ const todo = (project) => {
     project(LocalStorage.getObject(project.title));
   });
 
+  const edit = document.createElement('button');
+  edit.innerText = 'Edit';
+  edit.classList.add('btn', 'btn-primary');
+  edit.id = 'edit-task';
+
   const cancel = document.createElement('button');
   cancel.classList.add('btn', 'btn-danger');
   cancel.innerText = 'Cancel';
@@ -103,9 +110,54 @@ const todo = (project) => {
     priority,
     submit,
     cancel);
-
-  const main = document.getElementById('main');
   main.appendChild(container);
 };
 
-export { todo };
+const showTodoList = (project) => {
+  const presentProject = LocalStorage.getObject(project.title);
+  const listArr = presentProject.todoList;
+  const listDiv = document.createElement('div');
+  listDiv.classList.add('row d-flex justify-content-center');
+
+  main.appendChild(listDiv);
+
+  for (let i = 0; i < listArr.length; i++) {
+    const card = document.createElement('div');
+    card.classList = 'card col-6';
+    card.style = 'background-color:#F5F5F5';
+    card.innerHTML = `
+      <div class="card-body" >
+      <div class="row">
+        <h5 class="card-title col-10">${listArr[i].title}</h5>
+        <button type="button" id="edit-todo-${i}" class="btn btn-sm btn-secondary col-2">Edit</button>
+      </div>
+        <p class="card-text">${listArr[i].description}</p>
+        <span class='text-muted'>${listArr[i].dueDate}</span>
+        <span class='text-warning float-right'> ${listArr[i].priority}</span>
+        <button class="btn btn-success btn-block mt-5" id="complete-task-${i}">Complete Task</button>
+      </div>`;
+    listDiv.appendChild(card);
+    const editButton = document.getElementById(`edit-todo-${i}`);
+    editButton.addEventListener('click', () => {
+      document.getElementById('add-task-btn').classList = 'd-none';
+      document.getElementById('create-task').classList = 'd-none';
+      document.getElementById('todo-form').classList = '';
+      document.getElementById('edit-task').classList = 'btn btn-primary';
+      document.getElementById('todo-title').value = listArr[i].title;
+      document.getElementById('todo-description').value = listArr[i].description;
+      document.getElementById('duedate').value = listArr[i].dueDate;
+      document.getElementById('todo-priority').value = listArr[i].priority;
+
+      document.getElementById('edit-task').addEventListener('click', () => {
+        currentProject.todoList[i].title = document.getElementById('todo-title').value;
+        currentProject.todoList[i].description = document.getElementById('todo-description').value;
+        currentProject.todoList[i].dueDate = document.getElementById('due-date').value;
+        currentProject.todoList[i].priority = document.getElementById('todo-priority').value;
+        LocalStorage.setObj(currentProject, currentProject.title);
+        project(LocalStorage.getObj(currentProject.title));
+      });
+    });
+  };
+}
+
+  export { todo, showTodoList };
