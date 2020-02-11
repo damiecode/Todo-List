@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,21 +11,22 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-      <main id='main'>
-        <!-- <div class="container">
-          <div id="projects" class="col-12 col-sm-12 col-md-3">
-            <h2>Projects</h2>
-            <ul class="projects"></ul>
-          </div>
-
-          <div id="todos" class="col-12 col-sm-12 col-md-3">
-            <h3>My Todo List</h3>
-            <ul class="todos"></ul>
-          </div>
-          <div class="content col-12 col-sm-12 col-md-6">
-          </div>
-        </div> -->
-      </main>
+     <div id="container">
+       <div class="container text-center">
+         <h1 class="app-title">Todos</h1>
+         <ul class="todo-list js-todo-list"></ul>
+         <div class="empty-state">
+           <i class="fas fa-clipboard-list"></i>
+           <h2 class="empty-state__title">Add your first todo</h2>
+           <p class="empty-state__description">What do you want to get done today?</p>
+         </div>
+       <div class="d-flex">
+         <aside id='menu' class="col-3 h-100">
+           <ul id='project-list' class="list-group m-3"></ul>
+         </aside>
+         <main id='main' class="col-8"></main>
+       </div>
+     </div>
     <script src="./main.js"></script>
   </body>
 </html>

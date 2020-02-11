@@ -1,9 +1,10 @@
-const Project = (title) => ({
-  title,
-  todoList: []
-})
+const Project = (title) => {
+  const todoList = [];
+
+  return { title, todoList }
+};
 
 const addTodo = (todo, project) => {
   project.todoList.push(todo);
 };
-export { Project, addTodo };
+export { addTodo, Project };

@@ -1,4 +1,4 @@
-const ToDo = (title, description, dueDate, priority) => ({
+const ToDo = (title, description = '', dueDate = '', priority = '') => ({
   title,
   description,
   dueDate,

@@ -29,8 +29,8 @@ const createProject = (title) => {
   setObject(project, project.title);
 };
 
-const createTodo = (title, description, dueDate, priority, project) => {
-  const todo = ToDo(title, description, dueDate, priority);
+const createTodo = (todoTitle, todoDescription, todoDueDate, todoPriority, project) => {
+  const todo = ToDo(todoTitle, todoDescription, todoDueDate, todoPriority);
   const storedProject = getObject(project.title);
   addTodo(todo, storedProject);
   setObject(storedProject, project.title);
@@ -41,6 +41,6 @@ export {
   createProject,
   showProjects,
   deleteObject,
-  setObject,
   getObject,
+  setObject,
 };

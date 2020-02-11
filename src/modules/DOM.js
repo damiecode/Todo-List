@@ -1,19 +1,23 @@
 import * as LocalStorage from './localstorage';
 
+const projectList = document.getElementById('project-list');
 const main = document.getElementById('main');
+const menu = document.getElementById('menu');
 
 const todo = (project) => {
   const container = document.createElement('form');
   container.classList.add('todoForm');
+  container.id = 'todoForm';
   container.style.display = 'none';
 
   const button = document.createElement('button');
   button.classList.add('todoButton', 'btn', 'btn-primary', 'text-center');
+  button.id = 'todoButton'
   button.innerText = 'Add Todo';
   button.addEventListener('click', () => {
-    const container = document.querySelector('.todoForm');
+    const container = document.getElementById('todoForm');
     container.style.display = 'block';
-    const button = document.querySelector('.todotButton');
+    const button = document.getElementById('todoButton');
     button.style.display = 'none';
   });
 
@@ -74,7 +78,7 @@ const todo = (project) => {
   prioritylabel.innerText = 'Priority';
 
   const todoTitle = document.getElementById('todo-title');
-  const todoDescription = document.getElementById('todo-priority');
+  const todoDescription = document.getElementById('todo-description');
   const todoDueDate = document.getElementById('due-date');
   const todoPriority = document.getElementById('todo-priority');
 
@@ -96,9 +100,11 @@ const todo = (project) => {
   cancel.innerText = 'Cancel';
   cancel.addEventListener('click', () => {
     const container = document.querySelector('.todoForm');
-    container.style.display = 'none';
+    container.classList = 'd-none';
+    submit.classList = 'btn btn-sm btn-primary';
+    document.getElementById('edit-task').classList = 'd-none';
     const button = document.querySelector('.todotButton');
-    button.style.display = 'block';
+    button.classList = 'btn btn-primary btn-block';
   });
 
   container.append(titlelabel,
@@ -111,19 +117,20 @@ const todo = (project) => {
     submit,
     cancel);
   main.appendChild(container);
+  main.appendChild(button);
 };
 
 const showTodoList = (project) => {
   const presentProject = LocalStorage.getObject(project.title);
   const listArr = presentProject.todoList;
   const listDiv = document.createElement('div');
-  listDiv.classList.add('row d-flex justify-content-center');
+  listDiv.classList.add('row', 'd-flex', 'justify-content-center');
 
   main.appendChild(listDiv);
 
   for (let i = 0; i < listArr.length; i++) {
     const card = document.createElement('div');
-    card.classList = 'card col-6';
+    card.classList = 'card', 'col-6';
     card.style = 'background-color:#F5F5F5';
     card.innerHTML = `
       <div class="card-body" >
@@ -145,19 +152,90 @@ const showTodoList = (project) => {
       document.getElementById('edit-task').classList = 'btn btn-primary';
       document.getElementById('todo-title').value = listArr[i].title;
       document.getElementById('todo-description').value = listArr[i].description;
-      document.getElementById('duedate').value = listArr[i].dueDate;
+      document.getElementById('due-date').value = listArr[i].dueDate;
       document.getElementById('todo-priority').value = listArr[i].priority;
 
       document.getElementById('edit-task').addEventListener('click', () => {
-        currentProject.todoList[i].title = document.getElementById('todo-title').value;
-        currentProject.todoList[i].description = document.getElementById('todo-description').value;
-        currentProject.todoList[i].dueDate = document.getElementById('due-date').value;
-        currentProject.todoList[i].priority = document.getElementById('todo-priority').value;
-        LocalStorage.setObj(currentProject, currentProject.title);
-        project(LocalStorage.getObj(currentProject.title));
+        presentProject.todoList[i].title = document.getElementById('todo-title').value;
+        presentProject.todoList[i].description = document.getElementById('todo-description').value;
+        presentProject.todoList[i].dueDate = document.getElementById('due-date').value;
+        presentProject.todoList[i].priority = document.getElementById('todo-priority').value;
+        LocalStorage.setObject(presentProject, presentProject.title);
+        project(LocalStorage.getObject(presentProject.title));
       });
+    });
+
+    const complete = document.getElementById('complete-task-${i}');
+    complete.addEventListener('click', () => {
+      presentProject.todoList.splice(i, 1);
+      LocalStorage.setObject(presentProject, presentProject.title);
+      Project(LocalStorage.getObject(presentProject.title));
     });
   };
 }
 
-  export { todo, showTodoList };
+const project = (project) => {
+  if (project) {
+    while (main.firstChild) {
+      main.removeChild(main.firstChild);
+    };
+    const projectTitleDiv = document.createElement('div');
+
+    projectTitleDiv.innerHTML = `<h3 class='display-4 mt-4 mb-3 bg-white text-center rounded'>${project.title}</h3>`;
+    main.appendChild(projectTitleDiv);
+
+    todo(project);
+    showTodoList(project);
+  };
+};
+
+const renderPage = () => {
+  const projectsArr = LocalStorage.showProjects();
+  const projectsSection = document.createElement('div');
+  projectsSection.classList.add('m-4');
+  projectsSection.innerHTML = `
+  <input type="text" id="project-title" required>
+  <button class="btn btn-sm btn-primary" id="add-project">Add a Project</button>
+  `
+  menu.appendChild(projectsSection);
+
+  const projectBtn = document.getElementById('add-project');
+  projectBtn.addEventListener('click', () => {
+    const projectTitle = document.getElementById('project-title');
+    if (projectTitle.value.length > 0) {
+      LocalStorage.createProject(projectTitle.value);
+      projectList.innerHTML = '';
+      projectsSection.innerHTML = '';
+      renderPage();
+      project(LocalStorage.getObject(projectTitle.value));
+    } else {
+      alert('Your project name must be at least 1 character long!');
+    }
+  });
+
+  for (let i = 0; i < projectsArr.length; i++) {
+    const projectPageItem = document.createElement('li');
+    projectPageItem.classList.add('list-group-item');
+    projectPageItem.innerHTML = `
+    <li class="todo-item">
+      <input id='completed' type="checkbox">
+      <label for="completed" class="tick js-tick"></label>
+      <button class='btn-link'>${projectsArr[i].title}</button>
+      <button id='remove-${i}' class="delete-todo js-delete-todo btn btn-danger btn-sm float-right">X</button>
+    </li>`
+    projectPageItem.firstChild.addEventListener('click', () => {
+      project(projectsArr[i]);
+    });
+    projectList.appendChild(projectPageItem);
+    const removeBtn = document.getElementById(`remove-${i}`);
+    removeBtn.addEventListener('click', () => {
+      LocalStorage.deleteObject(removeBtn.parentElement.firstChild.innerHTML);
+      projectList.innerHTML = '';
+      projectsSection.innerHTML = '';
+      main.innerHTML = '';
+      renderPage();
+    });
+  }
+};
+
+export { renderPage, project, todo, showTodoList };
