@@ -30,6 +30,22 @@ const form = `<div class="form-group text-left">
                 <button type="button" id="cancel" class="btn btn-sm btn-danger">Cancel</button>
               </div>`;
 
+const showProject = (project) => {
+  if (project) {
+    while (main.firstChild) {
+      main.removeChild(main.firstChild);
+    }
+
+    const projectTitleDiv = document.createElement('div');
+
+    projectTitleDiv.innerHTML = `<h3 class='mt-4 mb-3 bg-white text-center rounded'>${project.title}</h3>`;
+    main.appendChild(projectTitleDiv);
+
+    todo(project);
+    showTodoList(project);
+  }
+};
+
 const todo = (project) => {
   const addTodo = document.createElement('button');
   const container = document.createElement('form');
@@ -77,7 +93,7 @@ const showTodoList = (project) => {
 
   main.appendChild(listDiv);
 
-  for (let i = 0; i < todoArr.length; i++) {
+  for (let i = 0; i < todoArr.length; i += 1) {
     const card = document.createElement('div');
     card.classList = 'card col-6';
     card.id = 'card';
@@ -121,22 +137,6 @@ const showTodoList = (project) => {
       LocalStorage.setObject(presentProject, presentProject.title);
       showProject(LocalStorage.getObject(presentProject.title));
     });
-  }
-};
-
-const showProject = (project) => {
-  if (project) {
-    while (main.firstChild) {
-      main.removeChild(main.firstChild);
-    }
-
-    const projectTitleDiv = document.createElement('div');
-
-    projectTitleDiv.innerHTML = `<h3 class='mt-4 mb-3 bg-white text-center rounded'>${project.title}</h3>`;
-    main.appendChild(projectTitleDiv);
-
-    todo(project);
-    showTodoList(project);
   }
 };
 
