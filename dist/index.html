@@ -6,7 +6,8 @@
     <title>Todo List</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
@@ -21,10 +22,11 @@
            <p class="empty-state__description">What do you want to get done today?</p>
          </div>
        <div class="d-flex">
-         <aside id='menu' class="col-3 h-100">
+         <div id='menu' class="col-5 ml-n4">
+           <h2 class="text-center mt-4">Projects</h2>
            <ul id='project-list' class="list-group m-3"></ul>
-         </aside>
-         <main id='main' class="col-8"></main>
+         </div>
+         <main id='main' class="col-7"></main>
        </div>
      </div>
     <script src="./main.js"></script>

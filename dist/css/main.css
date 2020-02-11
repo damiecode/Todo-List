@@ -18,7 +18,6 @@ html {
 
 .container {
   width: 100%;
-  max-width: 500px;
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
@@ -26,7 +25,6 @@ html {
   height: 90vh;
   margin-top: 5vh;
   margin-bottom: 5vh;
-  overflow-y: auto;
 }
 
 .app-title {
@@ -96,12 +94,6 @@ input[type="checkbox"] {
   width: 30px;
   height: 30px;
   pointer-events: none;
-}
-
-form {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 
 .empty-state {
