@@ -57,7 +57,7 @@ const todo = (project) => {
   const createTodoButton = document.getElementById('create-todo');
   createTodoButton.addEventListener('click', () => {
     LocalStorage.createTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value, project);
-    project(LocalStorage.getObject(project.title));
+    showProject(LocalStorage.getObject(project.title));
   });
 
   const cancelButton = document.getElementById('cancel');
@@ -80,18 +80,19 @@ const showTodoList = (project) => {
   for (let i = 0; i < todoArr.length; i++) {
     const card = document.createElement('div');
     card.classList = 'card col-6';
+    card.id = 'card';
     card.style = 'background-color:#F5F5F5';
     card.innerHTML = `
-                      <div class="card-body" >
-											<div class="row">
-	                      <h5 class="card-title col-10">${todoArr[i].title}</h5>
-												<button type="button" id="edit-todo-btn-${i}" class="btn btn-sm btn-secondary col-2">Edit</button>
-											</div>
-                        <p class="card-text">${todoArr[i].description}</p>
-                        <span class='text-muted'>${todoArr[i].dueDate}</span>
-                        <span class='text-warning float-right'> ${todoArr[i].priority}</span>
-                        <button class="btn btn-success btn-block mt-5" id="complete-task-${i}">Complete Task</button>
-                      </div>`;
+          <div class="card-body text-dark">
+          <div class="row">
+            <h5 class="card-title col-12 text-capitalize text-center">${todoArr[i].title}</h5>
+          </div>
+            <p class="card-text">${todoArr[i].description}</p>
+            <span class='text-muted'>${todoArr[i].dueDate}</span>
+            <span class='text-warning'> ${todoArr[i].priority}</span>
+            <button type="button" id="edit-todo-btn-${i}" class="btn btn-sm btn-secondary col-12">Edit</button>
+            <button class="btn btn-success btn-block mt-3" id="complete-task-${i}">Done</button>
+          </div>`;
     listDiv.appendChild(card);
     const editButton = document.getElementById(`edit-todo-btn-${i}`);
     editButton.addEventListener('click', () => {
@@ -110,7 +111,7 @@ const showTodoList = (project) => {
         presentProject.todoList[i].dueDate = document.getElementById('due-date').value;
         presentProject.todoList[i].priority = document.getElementById('todo-priority').value;
         LocalStorage.setObject(presentProject, presentProject.title);
-        project(LocalStorage.getObject(presentProject.title));
+        showProject(LocalStorage.getObject(presentProject.title));
       });
     });
 
@@ -118,12 +119,12 @@ const showTodoList = (project) => {
     completeButton.addEventListener('click', () => {
       presentProject.todoList.splice(i, 1);
       LocalStorage.setObject(presentProject, presentProject.title);
-      project(LocalStorage.getObject(presentProject.title));
+      showProject(LocalStorage.getObject(presentProject.title));
     });
   }
 };
 
-const project = (project) => {
+const showProject = (project) => {
   if (project) {
     while (main.firstChild) {
       main.removeChild(main.firstChild);
@@ -145,7 +146,7 @@ const renderPage = () => {
   const projectSection = document.createElement('div');
   projectSection.classList = 'm-4';
   projectSection.innerHTML = `<input type="text" id="project-title" required>
-                            <button class="btn btn-sm btn-primary" id="add-project">Add Project</button>`;
+                            <button class="btn btn-sm btn-primary mt-3" id="add-project">Add Project</button>`;
   menu.appendChild(projectSection);
 
   const addProjectBtn = document.getElementById('add-project');
@@ -156,7 +157,7 @@ const renderPage = () => {
       projectList.innerHTML = '';
       projectSection.innerHTML = '';
       renderPage();
-      project(LocalStorage.getObject(projectTitle.value));
+      showProject(LocalStorage.getObject(projectTitle.value));
     } else {
       alert('Your project name must be at least 1 character long!');
     }
@@ -165,10 +166,10 @@ const renderPage = () => {
   for (let i = 0; i < projectsArr.length; i++) {
     const projectPageItem = document.createElement('li');
     projectPageItem.classList.add('list-group-item');
-    projectPageItem.innerHTML = `<button class="btn btn-link">${projectsArr[i].title}</button>
-    <button id='remove-${i}' class='btn btn-danger btn-sm float-right'>X</button>`;
+    projectPageItem.innerHTML = `<button class="btn btn-link text-dark ml-n4">${projectsArr[i].title}</button>
+    <button id='remove-${i}' class='btn btn-danger btn-sm float-right'>del</button>`;
     projectPageItem.firstChild.addEventListener('click', () => {
-      project(projectsArr[i]);
+      showProject(projectsArr[i]);
     });
     projectList.appendChild(projectPageItem);
     const removeBtn = document.getElementById(`remove-${i}`);
@@ -184,7 +185,7 @@ const renderPage = () => {
 
 export {
   renderPage,
-  project,
+  showProject,
   todo,
   showTodoList,
 };
