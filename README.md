@@ -19,7 +19,7 @@ The full project requirements can be found [here](https://www.theodinproject.com
 
 - JavaScript (ES6)
 - HMTL
-- SCSS
+- CSS
 - npm
 - webpack
 
