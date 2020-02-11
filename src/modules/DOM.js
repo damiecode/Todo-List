@@ -156,6 +156,11 @@ const renderPage = () => {
   menu.appendChild(projectSection);
 
   const addProjectBtn = document.getElementById('add-project');
+  const alert = document.createElement('div');
+  alert.classList = 'd-none';
+  alert.id = 'alert-form';
+  alert.innerText = 'Your project name must be at least 1 character long!';
+  main.appendChild(alert);
   addProjectBtn.addEventListener('click', () => {
     const projectTitle = document.getElementById('project-title');
     if (projectTitle.value.length > 0) {
@@ -165,7 +170,7 @@ const renderPage = () => {
       renderPage();
       showProject(LocalStorage.getObject(projectTitle.value));
     } else {
-      alert('Your project name must be at least 1 character long!');
+      document.getElementById('alert-form').classList = 'alert-danger d-block tecx-center w-100  pt-2';
     }
   });
 
