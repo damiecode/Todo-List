@@ -22,8 +22,8 @@ The full project requirements can be found [here](https://www.theodinproject.com
 - SCSS
 - npm
 - webpack
-<!-- 
-### ✨ [Live Demo](https://raw.githack.com/ebukaume/todo-list/master/dist/index.html) -->
+
+### ✨ [Live Demo](https://rawcdn.githack.com/damiecode/Todo-List/feature/todo/dist/index.html)
 
 ## Usage
 
