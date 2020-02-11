@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-env browser */
 
 import * as LocalStorage from './localstorage';
 
@@ -56,7 +58,11 @@ const todo = (project) => {
 
   const createTodoButton = document.getElementById('create-todo');
   createTodoButton.addEventListener('click', () => {
-    LocalStorage.createTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value, project);
+    LocalStorage.createTodo(todoTitle.value,
+      todoDescription.value,
+      todoDueDate.value,
+      todoPriority.value,
+      project);
     showProject(LocalStorage.getObject(project.title));
   });
 
