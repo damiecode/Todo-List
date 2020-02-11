@@ -163,7 +163,7 @@ const renderPage = () => {
     }
   });
 
-  for (let i = 0; i < projectsArr.length; i++) {
+  for (let i = 0; i < projectsArr.length; i += 1) {
     const projectPageItem = document.createElement('li');
     projectPageItem.classList.add('list-group-item');
     projectPageItem.innerHTML = `<button class="btn btn-link text-dark ml-n4">${projectsArr[i].title}</button>
