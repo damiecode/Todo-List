@@ -29,11 +29,17 @@ const createProject = (title) => {
   setObject(project, project.title);
 };
 
+function foo() {
+  alert('Please fill in all fields!');
+  return false;
+}
+
 const createTodo = (todoTitle, todoDescription, todoDueDate, todoPriority, project) => {
   const todo = ToDo(todoTitle, todoDescription, todoDueDate, todoPriority);
   const storedProject = getObject(project.title);
   if (todoTitle === '' || todoDescription === '' || todoDueDate === '' || todoPriority === '') {
-    window.alert('Please fill in all fields!');
+    let Alert = new foo();
+    Alert;
   } else {
     addTodo(todo, storedProject);
     setObject(storedProject, project.title);
