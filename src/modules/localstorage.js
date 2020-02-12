@@ -35,9 +35,10 @@ const createTodo = (todoTitle, todoDescription, todoDueDate, todoPriority, proje
   if (todoTitle === '' || todoDescription === '' || todoDueDate === '' || todoPriority === '') {
     alert('Please fill in all fields!'); // eslint-disable-line no-alert
     return false;
-  };
-    addTodo(todo, storedProject);
-    setObject(storedProject, project.title);
+  }
+  addTodo(todo, storedProject);
+  setObject(storedProject, project.title);
+  return true;
 };
 
 export {
