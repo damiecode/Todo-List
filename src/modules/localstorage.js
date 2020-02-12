@@ -32,8 +32,12 @@ const createProject = (title) => {
 const createTodo = (todoTitle, todoDescription, todoDueDate, todoPriority, project) => {
   const todo = ToDo(todoTitle, todoDescription, todoDueDate, todoPriority);
   const storedProject = getObject(project.title);
-  addTodo(todo, storedProject);
-  setObject(storedProject, project.title);
+  if (todoTitle === '' || todoDescription === '' || todoDueDate === '' || todoPriority === '') {
+    alert('Please fill in all fields!');
+  } else {
+    addTodo(todo, storedProject);
+    setObject(storedProject, project.title);
+  };
 };
 
 export {

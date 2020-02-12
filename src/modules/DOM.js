@@ -8,15 +8,15 @@ const main = document.getElementById('main');
 const menu = document.getElementById('menu');
 const form = `<div class="form-group text-left">
                 <label for="todo-title">Task:</label>
-                <input type="text" class="form-control" id="todo-title" placeholder="Task">
+                <input type="text" class="form-control" id="todo-title" placeholder="Task" required>
               </div>
               <div class="form-group text-left">
                 <label for="todo-description">Description:</label>
-                <textarea class="form-control" id="todo-description" rows="2"></textarea>
+                <textarea class="form-control" id="todo-description" rows="2" required></textarea>
               </div>
               <div class="form-group text-left">
                 <label for="todo-priority">Priority:</label>
-                <select class="form-control" id="todo-priority">
+                <select class="form-control" id="todo-priority"required>
                   <option>High</option>
                   <option>Medium</option>
                   <option>Low</option>
@@ -24,7 +24,7 @@ const form = `<div class="form-group text-left">
               </div>
               <div class="form-group text-left">
                 <label for="due-date">Due date:</label>
-                <input class="form-control" type="date" id="due-date">
+                <input class="form-control" type="date" id="due-date" required>
               </div>
               <div id='form-buttons' class="mb-3">
                 <button type="button" id="create-todo" class="btn btn-sm btn-primary">Create Todo</button>
@@ -138,7 +138,7 @@ const showProject = (project) => {
 
     const projectTitleDiv = document.createElement('div');
 
-    projectTitleDiv.innerHTML = `<h3 class='mt-4 mb-3 bg-white text-center rounded'>${project.title}</h3>`;
+    projectTitleDiv.innerHTML = `<h3 class='mt-4 mb-3 text-center rounded'>${project.title}</h3>`;
     main.appendChild(projectTitleDiv);
 
     todo(project);
